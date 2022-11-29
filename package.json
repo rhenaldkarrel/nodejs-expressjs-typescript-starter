@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-express-mongodb-login-registration-example",
+  "version": "1.0.0",
+  "description": "Node.js (TypeScript)  Express + MongoDB: Login and Registration example with Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "login",
+    "registration",
+    "authentication",
+    "authorization",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "rhenaldkarrel",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9"
+  }
+}
