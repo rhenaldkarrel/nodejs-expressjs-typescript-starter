@@ -1,9 +1,22 @@
+/* eslint-disable no-console */
 import express from 'express';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
+import db from './models';
+import dbConfig from './config/db.config';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+db.mongoose
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`)
+  .then(() => {
+    console.log('Successfully connect to MongoDB...');
+  })
+  .catch(err => {
+    console.log('Connection error: ', err);
+    process.exit();
+  });
 
 const corsOptions = {
   origin: 'http://localhost:8081',
@@ -32,6 +45,5 @@ app.get('/', (req, res) => {
 
 // set port, listen for requests
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Server is running on port ${PORT}...`);
 });
