@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieSession from 'cookie-session';
 import db from './models';
 import dbConfig from './config/db.config';
+import { authRoutes, userRoutes } from './routes';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -42,6 +43,9 @@ app.use(
 app.get('/', (req, res) => {
   res.json({ message: "Welcome hello world!!!!!"});
 });
+
+app.use(authRoutes);
+app.use(userRoutes);
 
 // set port, listen for requests
 app.listen(PORT, () => {
