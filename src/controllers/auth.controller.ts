@@ -90,7 +90,8 @@ export const signin = (req: Request, res: Response) => {
       const authorities = [];
 
       for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUppercase());
+        const userRole = user.roles[i] as any;
+        authorities.push("ROLE_" + userRole.name.toUppercase());
       }
 
       if (req.session) {

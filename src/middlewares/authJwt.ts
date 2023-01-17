@@ -12,7 +12,7 @@ export interface IAuthJwtRequest extends Request {
 }
 
 const verifyToken = (
-  req: IAuthJwtRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -28,7 +28,7 @@ const verifyToken = (
         return res.status(401).send({ message: 'Unauthorized!' });
       }
 
-      req.userId = decoded;
+      (req as IAuthJwtRequest).userId = decoded;
       next();
     });
   } catch(err) {
@@ -37,11 +37,11 @@ const verifyToken = (
 };
 
 const isAdmin = (
-  req: IAuthJwtRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  User.findById(req.userId)
+  User.findById((req as IAuthJwtRequest).userId)
     .exec((err, user) => {
       if (err) {
         return res.status(500).send({ message: err });
@@ -67,11 +67,11 @@ const isAdmin = (
 };
 
 const isModerator = (
-  req: IAuthJwtRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  User.findById(req.userId)
+  User.findById((req as IAuthJwtRequest).userId)
     .exec((err, user) => {
       if (err) {
         return res.status(500).send({ message: err });
