@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import express from 'express';
 import cors from 'cors';
-import cookieSession from 'cookie-session';
 import db from './models';
 import dbConfig from './config/db.config';
 import { authRoutes, userRoutes } from './routes';
@@ -30,14 +29,6 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-url-encoded
 app.use(express.urlencoded({ extended: true }));
-
-app.use(
-  cookieSession({
-    name: "some-session",
-    secret: "COOKIE_SECRET",
-    httpOnly: true,
-  })
-);
 
 // routes
 app.get('/', (req, res) => {

@@ -18,7 +18,7 @@ const verifyToken = (
   next: NextFunction
 ) => {
   try {
-    const token = req.session?.token as string;
+    const token = req.headers.authorization?.replace('Bearer ', '') || '';
 
     if (!token) {
       return res.status(403).send({ message: 'No token provided!' });

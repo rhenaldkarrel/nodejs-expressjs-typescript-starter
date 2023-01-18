@@ -94,11 +94,8 @@ export const signin = (req: Request, res: Response) => {
         authorities.push("ROLE_" + userRole.name.toUpperCase());
       }
 
-      if (req.session) {
-        req.session.token = token;
-      }
-
       return res.status(200).send({
+        token,
         id: user._id,
         username: user.username,
         email: user.email,
@@ -109,7 +106,6 @@ export const signin = (req: Request, res: Response) => {
 
 export const signout = (req: Request, res: Response, next: NextFunction) => {
   try {
-    req.session = null;
     return res.status(200).send({ message: "You've been signed out!" });
   } catch(err) {
     next(err);
