@@ -3,6 +3,7 @@ import type { JwtPayload } from "jsonwebtoken";
 import authConfig from "../config/auth.config";
 import db from "../models";
 import type { Response, Request, NextFunction } from "express";
+import mongoose from "mongoose";
 
 const User = db.user;
 const Role = db.role;
@@ -41,7 +42,8 @@ const isAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  User.findById((req as IAuthJwtRequest).userId)
+  const _id = new mongoose.Types.ObjectId((req as IAuthJwtRequest).userId as string);
+  User.findById(_id)
     .exec((err, user) => {
       if (err) {
         return res.status(500).send({ message: err });
@@ -71,7 +73,8 @@ const isModerator = (
   res: Response,
   next: NextFunction
 ) => {
-  User.findById((req as IAuthJwtRequest).userId)
+  const _id = new mongoose.Types.ObjectId((req as IAuthJwtRequest).userId as string);
+  User.findById(_id)
     .exec((err, user) => {
       if (err) {
         return res.status(500).send({ message: err });
